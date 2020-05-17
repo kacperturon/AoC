@@ -1,0 +1,23 @@
+{
+  "name": "AoC2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "utils.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kacperturon/AoC2019.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kacperturon/AoC2019/issues"
+  },
+  "homepage": "https://github.com/kacperturon/AoC2019#readme",
+  "devDependencies": {
+    "eslint": "^6.7.2"
+  }
+}
