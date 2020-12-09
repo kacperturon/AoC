@@ -6,7 +6,7 @@ let findValue = (value, min, max, upperHalfChar) => {
     for(let char of chars){
         if(char===upperHalfChar){
             min=min+Math.round((max-min)/2);
-        }else max=max-Math.round((max-min)/2);
+        } else max=max-Math.round((max-min)/2);
     }
     return min;
 }
