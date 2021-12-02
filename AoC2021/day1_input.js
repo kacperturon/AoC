@@ -1,4 +1,15 @@
-module.exports = `151
+module.exports.sampleData = `199
+200
+208
+210
+200
+207
+240
+269
+260
+263`;
+
+module.exports.realData = `151
 152
 153
 158

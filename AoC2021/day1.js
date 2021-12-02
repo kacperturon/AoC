@@ -1,32 +1,19 @@
-const input = require('./day1_input');
+const { realData, sampleData } = require('./day1_input');
+const { executePart } = require('./helpers');
 
-// eslint-disable-next-line
-const testInput = `199
-200
-208
-210
-200
-207
-240
-269
-260
-263`;
-
-const lines = input.split('\n').map(Number);
-
-const part1 = () => {
+const part1 = (input) => {
+  const lines = input.split('\n').map(Number);
   let countIncrease = 0;
-
   for (let i = 1; i < lines.length; i += 1) {
     const prev = lines[i - 1];
     const curr = lines[i];
     if (curr > prev) countIncrease++;
   }
-
-  console.log('part1', countIncrease);
+  return countIncrease;
 };
 
-const part2 = () => {
+const part2 = (input) => {
+  const lines = input.split('\n').map(Number);
   let countIncrease = 0;
 
   let prev = 0;
@@ -40,9 +27,11 @@ const part2 = () => {
     if (sum > prev) countIncrease++;
     prev = sum;
   }
-
-  console.log('part2', countIncrease);
+  return countIncrease;
 };
 
-part1();
-part2();
+executePart(sampleData, part1, '1', '1', true);
+executePart(sampleData, part2, '2', '1', true);
+
+executePart(realData, part1, '1', '1', false);
+executePart(realData, part2, '2', '1', false);

@@ -1,35 +1,37 @@
-const { realData } = require('./day2_input');
+const { realData, sampleData } = require('./day2_input');
+const { executePart } = require('./helpers');
 
-const lines = realData.split('\n');
+const part1 = (input) => {
+  const lines = input.split('\n');
 
-const part1 = () => {
-  let counts = {
+  const counts = {
     up: 0,
     down: 0,
     forward: 0,
   };
-  
-  for(let i=0; i<lines.length; i++){
-    let [cmd, val] = lines[i].split(' ');
-    counts[cmd]+=Number(val);
+
+  for (let i = 0; i < lines.length; i++) {
+    const [cmd, val] = lines[i].split(' ');
+    counts[cmd] += Number(val);
   }
-  console.log('output', Math.abs(counts.down-counts.up)*counts.forward)
-}
+  return Math.abs(counts.down - counts.up) * counts.forward;
+};
 
+const part2 = (input) => {
+  const lines = input.split('\n');
 
-const part2 = () => {
-  let counts = {
+  const counts = {
     up: 0,
     down: 0,
     forward: 0,
     aim: 0,
-    depth: 0
+    depth: 0,
   };
 
-  for(let i=0; i<lines.length; i++){
-    let [cmd, valStr] = lines[i].split(' ');
+  for (let i = 0; i < lines.length; i++) {
+    const [cmd, valStr] = lines[i].split(' ');
     const val = Number(valStr);
-    switch(cmd){
+    switch (cmd) {
       case 'down':
         counts.down += val;
         counts.aim += val;
@@ -44,10 +46,11 @@ const part2 = () => {
         break;
     }
   }
+  return counts.forward * counts.depth;
+};
 
-  console.log('output', counts.forward * counts.depth);
-}
+executePart(sampleData, part1, '1', '2', true);
+executePart(sampleData, part2, '2', '2', true);
 
-
-part1();
-part2();
+executePart(realData, part1, '1', '2', false);
+executePart(realData, part2, '2', '2', false);
