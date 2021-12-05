@@ -30,8 +30,8 @@ const part2 = (input) => {
   return countIncrease;
 };
 
-executePart(sampleData, part1, '1', '1', true);
-executePart(sampleData, part2, '2', '1', true);
+executePart(sampleData, part1, '1', __filename, true);
+executePart(sampleData, part2, '2', __filename, true);
 
-executePart(realData, part1, '1', '1', false);
-executePart(realData, part2, '2', '1', false);
+executePart(realData, part1, '1', __filename, false);
+executePart(realData, part2, '2', __filename, false);

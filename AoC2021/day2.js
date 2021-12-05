@@ -49,8 +49,8 @@ const part2 = (input) => {
   return counts.forward * counts.depth;
 };
 
-executePart(sampleData, part1, '1', '2', true);
-executePart(sampleData, part2, '2', '2', true);
+executePart(sampleData, part1, '1', __filename, true);
+executePart(sampleData, part2, '2', __filename, true);
 
-executePart(realData, part1, '1', '2', false);
-executePart(realData, part2, '2', '2', false);
+executePart(realData, part1, '1', __filename, false);
+executePart(realData, part2, '2', __filename, false);
