@@ -1,4 +1,4 @@
-const { sampleData, realData } = require('./day5_input');
+const { day5: { realData, sampleData } } = require('./data');
 const { executePart } = require('./helpers');
 
 const parseCoordinates = (line) => {

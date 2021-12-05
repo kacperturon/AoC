@@ -1,4 +1,4 @@
-const { sampleData, realData } = require('./day3_input');
+const { day3: { realData, sampleData } } = require('./data');
 const { executePart } = require('./helpers');
 
 // "10011" -> [1, 0, 0, 1, 1]

@@ -1,4 +1,4 @@
-const { sampleData, realData } = require('./day4_input');
+const { day4: { realData, sampleData } } = require('./data');
 const { executePart } = require('./helpers');
 
 const parseBoard = (boardLine) => boardLine.split('\n').map((line) => line.split(/ +/).filter((val) => val !== '').map(Number));
