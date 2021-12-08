@@ -5,6 +5,7 @@ const day4 = require('./day4_input');
 const day5 = require('./day5_input');
 const day6 = require('./day6_input');
 const day7 = require('./day7_input');
+const day8 = require('./day8_input');
 
 module.exports = {
   day1,
@@ -14,4 +15,5 @@ module.exports = {
   day5,
   day6,
   day7,
+  day8,
 };
