@@ -75,13 +75,13 @@ def fn(data, reverse = False):
       else:
         state[toRow+offsetRow][toCol-1] = state[fromRow+offsetRow][fromCol-1]
       state[fromRow+offsetRow][fromCol-1] = ''
-    printState(state)
+    # printState(state)
   return topCharsState(state)
 
 
-# print("A sample:", fn(sample_data))
+print("A sample:", fn(sample_data))
 print("A real:", fn(real_data))
 
-# print("B sample", fn(sample_data, True))
-# print("B real:", fn(real_data, True))
+print("B sample", fn(sample_data, True))
+print("B real:", fn(real_data, True))
 
