@@ -1,13 +1,20 @@
 from Day9_data import sample_data, sample_2_data, real_data
 
 def updateKnotLocation(head, knot):
+  # x distance = 2
   if abs(knot[0] - head[0]) == 2:
+    # move towards head by 1 in x direction
     knot[0] += [1, -1][knot[0] > head[0]]
+    # if y distance is more than 1 or more
     if abs(knot[1] - head[1]) >= 1:
+        # move towards head by 1 in y direction
         knot[1] += [1, -1][knot[1] > head[1]]
+  # y distance 2
   elif abs(knot[1] - head[1]) == 2:
+    #  move towards head by 1 in y direction
     knot[1] += [1, -1][knot[1] > head[1]]
     if abs(knot[0] - head[0]) >= 1:
+      # move towards head by in in x direction
       knot[0] += [1, -1][knot[0] > head[0]]
   return knot
 
