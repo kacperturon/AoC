@@ -11,7 +11,7 @@ test = """3   4
 if runTest:
     input = test
 else: 
-    input = getFileStr('day1.txt')
+    input = getFileStr('./day1.txt')
 
 def intArrays(input):
     lines = input.splitlines()

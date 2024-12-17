@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 # Initialize the parser
 parser = argparse.ArgumentParser(description="Example of passing flags to Python")
@@ -9,6 +10,8 @@ args = parser.parse_args()
 runTest = args.test
 
 def getFileStr(filename):
-    with open(filename, 'r') as file:
+    p = Path(__file__).with_name(filename)
+
+    with open(p, 'r') as file:
         input = file.read()
     return input
