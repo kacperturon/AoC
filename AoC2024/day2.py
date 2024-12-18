@@ -1,5 +1,4 @@
 from helpers import runTest, getFileStr
-from queue import PriorityQueue 
 
 test = """7 6 4 2 1
 1 2 7 8 9
@@ -17,6 +16,7 @@ else:
     input = getFileStr('./day2.txt')
 
 lines = input.splitlines()
+print(lines)
 
 def report_safe(nums):
     safe = True
