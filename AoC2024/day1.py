@@ -1,4 +1,4 @@
-from helpers import runTest, getFileStr
+from helpers import runTest, get_file_str
 from queue import PriorityQueue 
 
 test = """3   4
@@ -11,7 +11,7 @@ test = """3   4
 if runTest:
     input = test
 else: 
-    input = getFileStr('./day1.txt')
+    input = get_file_str('./day1.txt')
 
 def intArrays(input):
     lines = input.splitlines()

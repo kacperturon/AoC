@@ -1,4 +1,4 @@
-from helpers import runTest, getFileStr
+from helpers import runTest, get_file_str
 import re
 
 
@@ -6,9 +6,9 @@ test = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
 test2 = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
 
 if runTest:
-    input = test2
+    input = test
 else: 
-    input = getFileStr('./day3.txt')
+    input = get_file_str('./day3.txt')
 
 def get_muls(str):
     # Regular expression to match "mul(number,number)" with round brackets only

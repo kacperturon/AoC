@@ -1,4 +1,4 @@
-from helpers import runTest, getFileStr
+from helpers import runTest, get_file_str
 
 test = """7 6 4 2 1
 1 2 7 8 9
@@ -13,7 +13,7 @@ test = """7 6 4 2 1
 if runTest:
     input = test
 else: 
-    input = getFileStr('./day2.txt')
+    input = get_file_str('./day2.txt')
 
 lines = input.splitlines()
 print(lines)

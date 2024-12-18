@@ -1,0 +1,31 @@
+from helpers import runTest, get_file_lines, get_file_str
+
+test= """MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX"""
+
+if runTest:
+    input = test.splitlines()
+else: 
+    input = get_file_lines('./day4.txt')
+
+H, W = len(input), len(input[0])-1
+grid = {(y,x):input[y][x] for y in range(H) for x in range(W)}
+count = 0
+for y,x in grid:
+    for dx, dy in [(0,1), (0,-1), (1,0), (-1,0), (1,1), (-1,-1), (-1,1), (1,-1)]:
+        candidate = ""
+        for i in range(4):
+            if grid.get((y+i*dx,x+i*dy)):
+                candidate += grid.get((y+i*dx,x+i*dy))
+        if candidate == "XMAS":
+            count += 1
+
+print('count', count)

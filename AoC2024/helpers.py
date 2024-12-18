@@ -9,9 +9,16 @@ parser.add_argument('--test', action='store_true')
 args = parser.parse_args()
 runTest = args.test
 
-def getFileStr(filename):
+def get_file_str(filename):
     p = Path(__file__).with_name(filename)
 
     with open(p, 'r') as file:
         input = file.read()
+    return input
+
+def get_file_lines(filename):
+    p = Path(__file__).with_name(filename)
+
+    with open(p, 'r') as file:
+        input = file.readlines()
     return input
