@@ -29,3 +29,18 @@ for y,x in grid:
             count += 1
 
 print('count', count)
+count = 0
+for y,x in grid:
+    if grid.get((y,x)) == "A":
+        LT = grid.get((y+1, x+1))
+        RB = grid.get((y-1, x-1))
+        if LT == "M" and RB == "S" or LT == "S" and RB == "M":
+            RT = grid.get((y-1, x+1))
+            LB = grid.get((y+1, x-1))
+            if RT == "M" and LB == "S" or RT == "S" and LB == "M":
+                count+=1
+# 00 01 02
+# 10 11 12
+# 20 21 22
+
+print('count', count)
