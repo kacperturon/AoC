@@ -32,7 +32,7 @@ test= """47|53
 if runTest:
     input = test.splitlines()
 else: 
-    input = get_file_lines('./day5.txt')
+    input = get_file_lines('day5.txt')
 
 ordering_rules = {}
 pages_to_print_multi = []

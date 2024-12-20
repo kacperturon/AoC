@@ -8,7 +8,7 @@ test2 = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5
 if runTest:
     input = test
 else: 
-    input = get_file_str('./day3.txt')
+    input = get_file_str('day3.txt')
 
 def get_muls(str):
     # Regular expression to match "mul(number,number)" with round brackets only

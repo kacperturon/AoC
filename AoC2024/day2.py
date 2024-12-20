@@ -13,7 +13,7 @@ test = """7 6 4 2 1
 if runTest:
     input = test
 else: 
-    input = get_file_str('./day2.txt')
+    input = get_file_str('day2.txt')
 
 lines = input.splitlines()
 print(lines)

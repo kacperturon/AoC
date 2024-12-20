@@ -14,10 +14,11 @@ MXMXAXMASX"""
 if runTest:
     input = test.splitlines()
 else: 
-    input = get_file_lines('./day4.txt')
+    input = get_file_lines('day4.txt')
 
 H, W = len(input), len(input[0])-1
 grid = {(y,x):input[y][x] for y in range(H) for x in range(W)}
+print(grid)
 count = 0
 for y,x in grid:
     for dx, dy in [(0,1), (0,-1), (1,0), (-1,0), (1,1), (-1,-1), (-1,1), (1,-1)]:
