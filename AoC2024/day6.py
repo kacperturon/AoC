@@ -1,4 +1,3 @@
-
 from helpers import runTest, get_file_lines, get_file_str
 
 test = """....#.....
