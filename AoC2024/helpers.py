@@ -22,3 +22,9 @@ def get_file_lines(filename):
     with open(p, 'r') as file:
         input = file.readlines()
     return input
+
+
+#  *vals - to pass an array as individual params to a fn i.e. vals - [1,2,3]
+#  fn(*vals) 
+#  def fn(a, b, c):
+#       print(a, b, c)  // a - 1; b - 2; c - 3
