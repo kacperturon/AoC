@@ -49,16 +49,38 @@ def get_area_perimeter(grid, y, x):
                 perimeter += 1
     return area, perimeter, list(visited)
 
+def count_sides(grid, visited, plot):
+    sides = 0
+    for y,x in visited:
+        if (((y-1), x) not in grid or grid[((y-1), x)] != plot) and ((y, (x+1)) not in grid or grid[(y, (x+1))] != plot):
+            sides += 1
+        if ((y, (x+1)) not in grid or grid[(y, (x+1))] != plot) and ((y+1, x) not in grid or grid[(y+1), x] != plot):
+            sides += 1
+        if ((y+1, x) not in grid or grid[(y+1), x] != plot) and ((y, x-1) not in grid or grid[(y, x-1)] != plot):
+            sides += 1
+        if ((y, x-1) not in grid or grid[(y, x-1)] != plot) and ((y-1, x) not in grid or grid[(y-1, x)] != plot):
+            sides += 1
+        if ((y-1), x) in grid and grid[((y-1), x)] == plot and (y, x+1) in grid and grid[(y, x+1)] == plot and (y-1, x+1) in grid and grid[((y-1), (x+1))] != plot:
+            sides += 1
+        if (y, (x+1)) in grid and grid[(y, (x+1))] == plot and (y+1, x) in grid and grid[(y+1), x] == plot and (y+1, x+1) in grid and grid[((y+1), (x+1))] != plot:
+            sides += 1
+        if (y+1, x) in grid and grid[(y+1), x] == plot and (y, x-1) in grid and grid[(y, x-1)] == plot and (y+1, x-1) in grid and grid[((y+1), (x-1))] != plot:
+            sides += 1
+        if (y, x-1) in grid and grid[(y, x-1)] == plot and (y-1, x) in grid and grid[(y-1, x)] == plot and (y-1, x-1) in grid and grid[((y-1), (x-1))] != plot:
+            sides += 1
+    return sides
 
 sum = 0
+sum2 = 0
 plots_done = {}
 for y,x in grid:
     if grid[(y,x)] not in plots_done:
         plots_done[grid[(y,x)]] = []
         area, perimeter, visited = get_area_perimeter(grid, y, x)
-        # print(grid[(y,x)], area, perimeter, area*perimeter)
+        sides = count_sides(grid, visited, grid[(y,x)])
         plots_done[grid[(y,x)]].append(visited)
         sum += area * perimeter
+        sum2 += area * sides
     else: 
         in_plot = False
         for plot in plots_done[grid[(y,x)]]:
@@ -66,7 +88,10 @@ for y,x in grid:
                 in_plot = True
         if not in_plot:
             area, perimeter, visited = get_area_perimeter(grid, y, x)
-            # print(grid[(y,x)], area, perimeter, area*perimeter)
+            sides = count_sides(grid, visited, grid[(y,x)])
             plots_done[grid[(y,x)]].append(visited)
             sum += area * perimeter
+            sum2 += area * sides
+
 print(sum)
+print(sum2)
