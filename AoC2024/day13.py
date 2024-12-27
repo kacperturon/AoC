@@ -82,3 +82,14 @@ for prize in grid:
         sum += int(a*3+b)
 
 print(sum)
+
+offset = 10000000000000
+sum = 0
+for prize in grid:
+    a_movement = grid[prize][0]
+    b_movement = grid[prize][1]
+    a, b = find_intersection((prize[0]+offset, prize[1]+offset), a_movement, b_movement)
+    if a.is_integer() and b.is_integer():
+        sum += a*3+b
+
+print(int(sum))
