@@ -79,7 +79,7 @@ def count_per_quadrant(grid):
 
 # print_grid(grid)
 
-for second in range(100):
+def run_step(grid):
     new_grid = {}
     for pos in grid:
         vecs = grid[pos]
@@ -90,11 +90,34 @@ for second in range(100):
                 new_grid[(new_x, new_y)] += [(vec[0], vec[1])]
             else:
                 new_grid[(new_x, new_y)] = [(vec[0], vec[1])]
-    grid = new_grid
-    # print_grid(grid)
+    return new_grid
 
-# print_grid(grid)
+def simulate_seconds(secs, grid):
+    for second in range(secs):
+        grid = run_step(grid)
+    return grid
 
-quadrant_counts = count_per_quadrant(grid)
+def only_one_robot_per_cell(grid):
+    for y in range(H):
+        for x in range(W):
+            if (x,y) in grid and len(grid[(x,y)]) > 1:
+                return False
+    return True
+
+def simulate_easter_egg(grid):
+    steps = 0
+    while not only_one_robot_per_cell(grid):
+        grid = run_step(grid)
+        steps += 1
+    return grid, steps
+
+# part 1
+quadrant_counts = count_per_quadrant(simulate_seconds(100, grid))
 quadrant_sum = reduce(lambda x, y: x*y, quadrant_counts)
 print(quadrant_sum)
+
+# part 2
+grid, steps = simulate_easter_egg(grid)
+# print_grid(grid)
+print(steps)
+
