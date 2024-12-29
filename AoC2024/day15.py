@@ -62,7 +62,6 @@ instr_vec = {
 
 def print_warehouse(warehouse, robot_x, robot_y, wide=False):
     width = W if wide == False else W*2
-    print('wide', wide, width)
     for y in range(H):
         line = ""
         for x in range(width):
@@ -87,6 +86,7 @@ for y in range(len(input)):
             if x+1 > W:
                 W = x+1
             if line[x] == '@':
+                print('robot', y, x)
                 robot_x = x
                 robot_y = y
                 warehouse[(y,x)] = '.'
@@ -144,6 +144,131 @@ def execute_instructions(warehouse, instructions, robot_y, robot_x):
                     warehouse[((new_new_y, new_new_x))] = 'O'
     return warehouse
 
+def execute_instructions_2(warehouse, instructions, robot_y, robot_x):
+    for i in range(40):
+    # for instr in instructions:
+        move_vec = instr_vec[instructions[i]]
+        print(i+1, 'instr', instructions[i])
+        new_x = robot_x + move_vec[1]
+        new_y = robot_y + move_vec[0]
+        new_val = warehouse[(new_y, new_x)]
+        if new_val == '.':
+            robot_x = new_x
+            robot_y = new_y
+        elif new_val == '#':
+            continue
+        elif new_val == ']' or new_val == '[':
+            if (move_vec[1] == 1 or move_vec[1] == -1) and move_vec[0] == 0:
+                new_new_y = new_y + move_vec[0] + move_vec[0]
+                new_new_x = new_x + move_vec[1] + move_vec[1]
+                new_new_val = warehouse[(new_new_y, new_new_x)]
+                if new_new_val == '#':
+                    continue
+                elif new_new_val == '.':
+                    warehouse[(new_y, new_x)] = '.'
+                    if move_vec[1] == 1:
+                        warehouse[(new_y + move_vec[0], new_x + move_vec[1])] = "["
+                        warehouse[(new_new_y, new_new_x)] = "]"
+                    else:
+                        warehouse[(new_y + move_vec[0], new_x + move_vec[1])] = "]"
+                        warehouse[(new_new_y, new_new_x)] = "["
+
+                    robot_x = new_x
+                    robot_y = new_y
+                else:
+                    end_wall = False
+                    while warehouse[(new_new_y, new_new_x)] == ']' or  warehouse[(new_new_y, new_new_x)] == '[':
+                        new_new_y += move_vec[0]
+                        new_new_x += move_vec[1]
+                        if warehouse[((new_new_y, new_new_x))] == '#':
+                            end_wall = True
+                            break
+                    if end_wall:
+                        continue
+                    else:
+                        robot_x = new_x
+                        robot_y = new_y
+                        warehouse[(new_y, new_x)] = '.'
+                        new_y += move_vec[0]
+                        new_x += move_vec[1]
+                        if move_vec[1] == 1:
+                            right = False
+                            while new_x != new_new_x or new_y != new_new_y:
+                                warehouse[(new_y, new_x)] = "]" if right else "["
+                                new_x += move_vec[1]
+                                new_y += move_vec[0]
+                                right = False if right else True 
+                            warehouse[(new_y, new_x)] = "]" if right else "["
+                        else:
+                            right = True
+                            while new_x != new_new_x or new_y != new_new_y:
+                                warehouse[(new_y, new_x)] = "]" if right else "["
+                                new_x += move_vec[1]
+                                new_y += move_vec[0]
+                                right = False if right else True 
+                            warehouse[(new_y, new_x)] = "]" if right else "["
+            else:
+                new_new_y = new_y + move_vec[0] 
+                new_new_x = new_x + move_vec[1]
+                new_new_val = warehouse[(new_new_y, new_new_x)]
+                if new_new_val == '#':
+                    continue
+                elif new_new_val == '.':
+                    if new_val == ']' and warehouse[(new_new_y, new_new_x-1)] == '.':
+                        warehouse[(new_new_y, new_new_x-1)] = "["
+                        warehouse[(new_new_y, new_new_x)] = "]"
+                        warehouse[(new_y, new_x)] = '.'
+                        warehouse[(new_y, new_x-1)] = '.'
+                    elif new_val == '[' and warehouse[(new_new_y, new_new_x+1)] == '.':
+                        warehouse[(new_new_y, new_new_x+1)] = "]"
+                        warehouse[(new_new_y, new_new_x)] = "["
+                        warehouse[(new_y, new_x)] = '.'
+                        warehouse[(new_y, new_x+1)] = '.'
+                    robot_x = new_x
+                    robot_y = new_y
+                else:
+                    end_wall = False
+                    print('here testing end wall', warehouse[(new_new_y, new_new_x)], warehouse[(new_y, new_x)])
+                    while warehouse[(new_new_y, new_new_x)] == ']' or warehouse[(new_new_y, new_new_x)] == '[':
+                        new_new_y += move_vec[0]
+                        new_new_x += move_vec[1]
+                        if warehouse[((new_new_y, new_new_x))] == '#' or warehouse[(new_new_y, new_new_x)] != warehouse[(new_y, new_x)]:
+                            end_wall = True
+                            break
+                    if end_wall:
+                        continue
+                    else:
+                        robot_x = new_x
+                        robot_y = new_y
+                        if new_val == ']' and warehouse[(new_new_y, new_new_x-1)] == '.':
+                            warehouse[(new_y, new_x)] = '.'
+                            warehouse[(new_y, new_x-1)] = '.'   
+                            new_y += move_vec[0]
+                            new_x += move_vec[1]
+                            while new_x != new_new_x or new_y != new_new_y:
+                                warehouse[(new_y, new_x)] = "]"
+                                warehouse[(new_y, new_x-1)] = "["
+                                new_x += move_vec[1]
+                                new_y += move_vec[0]
+                            warehouse[(new_y, new_x)] = "]"
+                            warehouse[(new_y, new_x-1)] = "["     
+
+                        elif new_val == '[' and warehouse[(new_new_y, new_new_x+1)] == '.':
+                            warehouse[(new_y, new_x)] = '.'
+                            warehouse[(new_y, new_x+1)] = '.' 
+
+                            new_y += move_vec[0]
+                            new_x += move_vec[1]
+                            while new_x != new_new_x or new_y != new_new_y:
+                                warehouse[(new_y, new_x)] = "["
+                                warehouse[(new_y, new_x+1)] = "]"
+                                new_x += move_vec[1]
+                                new_y += move_vec[0]
+                            warehouse[(new_y, new_x)] = "["
+                            warehouse[(new_y, new_x+1)] = "]"
+        print_warehouse(warehouse, robot_x, robot_y, True )
+    return warehouse, robot_y, robot_x
+
 # print(sum_box_coords(execute_instructions(warehouse, instrs, robot_y, robot_x)))
 
 def warehouse_twice_as_wide(warehouse, robot_y, robot_x):
@@ -164,10 +289,10 @@ def warehouse_twice_as_wide(warehouse, robot_y, robot_x):
                 new_warehouse[(y,x+x_offset)] = '['
                 x_offset += 1
                 new_warehouse[(y,x+x_offset)] = ']'
-            if y == robot_y and x == robot_x:
-                robot_x += x_offset-1
-    return new_warehouse, robot_y, robot_x
+    return new_warehouse, robot_y, robot_x * 2
 
-print_warehouse(warehouse, robot_x, robot_y, False)
+# print_warehouse(warehouse, robot_x, robot_y, )
 new_warehouse, robot_y, robot_x = warehouse_twice_as_wide(warehouse, robot_y, robot_x)
+print_warehouse(new_warehouse, robot_x, robot_y, True)
+new_warehouse, robot_y, robot_x = execute_instructions_2(new_warehouse, instrs, robot_y, robot_x)
 print_warehouse(new_warehouse, robot_x, robot_y, True)
